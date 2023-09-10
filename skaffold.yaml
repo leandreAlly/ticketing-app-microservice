@@ -6,10 +6,8 @@ manifests:
 build:
   local:
     push: false
-  googleCloudBuild:
-    projectId: ticketing-dev-398401
   artifacts:
-    - image: us.gcr.io/ticketing-dev-398401/auth
+    - image: allyleandre/auth
       context: auth
       sync:
         manual:
