@@ -3,7 +3,7 @@ import "express-async-errors";
 import mongoose from "mongoose";
 
 import { currentUserRouter } from "./routes/current-user";
-import { siginupRouter } from "./routes/signup";
+import { signupRouter } from "./routes/signup";
 import { signoutRouter } from "./routes/signout";
 import { signinRouter } from "./routes/signin";
 import { errorHandler } from "./middlewares/error-handler";
@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 
 app.use(currentUserRouter);
-app.use(siginupRouter);
+app.use(signupRouter);
 app.use(signoutRouter);
 app.use(signinRouter);
 
