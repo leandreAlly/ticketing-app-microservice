@@ -11,7 +11,15 @@ build:
       context: auth
       sync:
         manual:
-          - src: src/**/*.ts
+          - src: "src/**/*.ts"
+            dest: .
+      docker:
+        dockerfile: Dockerfile
+    - image: allyleandre/ticketing-client
+      context: client
+      sync:
+        manual:
+          - src: "**/*.ts"
             dest: .
       docker:
         dockerfile: Dockerfile
