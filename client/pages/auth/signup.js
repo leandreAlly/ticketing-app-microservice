@@ -12,11 +12,12 @@ const Signup = () => {
       email,
       password,
     },
+    onSuccess: () => Router.push("/"),
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    Router.push("/");
+
     doRequest();
   };
 
