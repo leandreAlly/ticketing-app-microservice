@@ -1,10 +1,8 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { User } from "../models/user";
-
 import jwt from "jsonwebtoken";
-import { ConflictRequestError } from "../errors/conflict-request-error";
-import { validateReuqest } from "../middlewares/validate-request";
+import { ConflictRequestError, validateReuqest } from "@ally-tickets/common";
 
 const router = express.Router();
 
