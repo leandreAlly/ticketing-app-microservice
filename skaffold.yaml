@@ -23,3 +23,11 @@ build:
             dest: .
       docker:
         dockerfile: Dockerfile
+    - image: allyleandre/tickets
+      context: tickets
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+      docker:
+        dockerfile: Dockerfile
