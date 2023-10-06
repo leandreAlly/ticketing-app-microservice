@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { User } from "../models/user";
 import jwt from "jsonwebtoken";
-import { ConflictRequestError, validateReuqest } from "@ally-tickets/common";
+import { ConflictRequestError, validateRequest } from "@ally-tickets/common";
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ router.post(
       .isLength({ min: 4, max: 20 })
       .withMessage("Password must be between 4 and 20 characters!"),
   ],
-  validateReuqest,
+  validateRequest,
   async (req: Request, res: Response) => {
     const { email, password } = req.body;
 

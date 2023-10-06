@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import jwt from "jsonwebtoken";
-import { validateReuqest, BadRequestError } from "@ally-tickets/common";
+import { validateRequest, BadRequestError } from "@ally-tickets/common";
 import { User } from "../models/user";
 import { Password } from "../services/password";
 
@@ -16,7 +16,7 @@ router.post(
       .notEmpty()
       .withMessage("You must provide a password"),
   ],
-  validateReuqest,
+  validateRequest,
   async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
