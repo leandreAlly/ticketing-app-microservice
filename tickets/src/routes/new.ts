@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { requireAuth, validateRequest } from "@ally-tickets/common";
 import { Ticket } from "../models/tickets";
+import { TicketCreatedPublisher } from "../events/publishers/ticket-create-publisher";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -25,6 +27,13 @@ router.post(
     });
 
     await tickets.save();
+
+    new TicketCreatedPublisher(natsWrapper.client).publish({
+      id: tickets.id,
+      title: tickets.title,
+      price: tickets.price,
+      userId: tickets.userId,
+    });
 
     return res.status(201).send(tickets);
   }
