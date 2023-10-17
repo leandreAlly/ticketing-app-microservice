@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { requireAuth, validateRequest } from "@ally-tickets/common";
 import { Ticket } from "../models/tickets";
-import { TicketCreatedPublisher } from "../events/publishers/ticket-create-publisher";
+import { TicketCreatedPublisher } from "../events/publishers/ticket-created-publisher";
 import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
