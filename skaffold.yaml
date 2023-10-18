@@ -31,3 +31,11 @@ build:
             dest: .
       docker:
         dockerfile: Dockerfile
+    - image: allyleandre/orders
+      context: orders
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+      docker:
+        dockerfile: Dockerfile
