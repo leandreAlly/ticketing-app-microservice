@@ -47,11 +47,13 @@ schema.methods.isReserved = async function () {
   // If we find an order from that means the ticket *is* reserved
   const existingOrder = await Order.findOne({
     ticket: this,
-    $in: [
-      OrderStatus.Created,
-      OrderStatus.AwaitingPayment,
-      OrderStatus.Complete,
-    ],
+    status: {
+      $in: [
+        OrderStatus.Created,
+        OrderStatus.AwaitingPayment,
+        OrderStatus.Complete,
+      ],
+    },
   });
   return !!existingOrder; // return true if existingOrder is not null
 };
