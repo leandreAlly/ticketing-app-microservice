@@ -46,6 +46,17 @@ const schema = new mongoose.Schema(
 
 schema.set("versionKey", "version");
 schema.plugin(updateIfCurrentPlugin);
+
+// versioning without using the pluginß
+
+// schema.pre("save", function (done) {
+//   // @ts-ignore
+//   this.$where = {
+//     version: this.get("version") - 1,
+//   };
+//   done();
+// });
+
 schema.statics.findByEvent = (event: { id: string; version: number }) => {
   return Ticket.findOne({
     _id: event.id,
