@@ -1,9 +1,8 @@
+import { TicketUpdatedEvent } from "@ally-tickets/common";
 import mongoose from "mongoose";
+import { Message } from "node-nats-streaming";
 import { Ticket } from "../../../models/ticket";
 import { natsWrapper } from "../../../nats-wrapper";
-import { TicketCreatedListener } from "../ticket-created-listner";
-import { TicketUpdatedEvent } from "@ally-tickets/common";
-import { Message } from "node-nats-streaming";
 import { TicketUpdatedListener } from "../ticket-updated-listener";
 
 const setup = async () => {
@@ -52,4 +51,16 @@ it("acks the message", async () => {
   await listener.onMessage(data, msg);
 
   expect(msg.ack).toHaveBeenCalled();
+});
+
+it("does not call ack if the event has a skipped version number", async () => {
+  const { listener, data, msg, ticket } = await setup();
+
+  data.version = 10;
+
+  try {
+    await listener.onMessage(data, msg);
+  } catch (error) {}
+
+  expect(msg.ack).not.toHaveBeenCalled();
 });
