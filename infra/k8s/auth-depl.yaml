@@ -17,7 +17,7 @@ spec:
           image: allyleandre/auth
           env:
             - name: MONGO_URI
-              value: "mongodb+srv://leandreAlly:Ally0788!@testing.2u4ar05.mongodb.net/auth"
+              value: ""
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
