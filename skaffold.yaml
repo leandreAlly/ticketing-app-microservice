@@ -47,3 +47,11 @@ build:
             dest: .
       docker:
         dockerfile: Dockerfile
+    - image: allyleandre/payments
+      context: payments
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+      docker:
+        dockerfile: Dockerfile
