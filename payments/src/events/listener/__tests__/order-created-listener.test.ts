@@ -30,7 +30,7 @@ const setup = async () => {
 it("replicates the order info", async () => {
   const { listener, data, msg } = await setup();
 
-  //   await listener.onMessage(data, msg);
+  await listener.onMessage(data, msg);
 
   const order = await Order.findById(data.id);
 
