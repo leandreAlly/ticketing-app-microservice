@@ -3,6 +3,9 @@ import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../app";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 declare global {
   var signin: (id?: string) => string[];
@@ -11,6 +14,8 @@ declare global {
 jest.mock("../nats-wrapper");
 
 process.env.STRIPE_KEY;
+
+console.log("stripeKey", process.env.STRIPE_KEY);
 
 let mongo: any;
 beforeAll(async () => {

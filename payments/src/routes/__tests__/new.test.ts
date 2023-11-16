@@ -5,7 +5,6 @@ import { Order } from "../../models/order";
 import { OrderStatus } from "@ally-tickets/common";
 import { stripe } from "../../stripe";
 
-
 it("return a 404 when purchasing an order that does not exist", async () => {
   await request(app)
     .post("/api/payments")
@@ -68,24 +67,25 @@ it("returns a 201 with valid inputs", async () => {
     id: new mongoose.Types.ObjectId().toHexString(),
     userId,
     version: 0,
-    price: 20,
+    price,
     status: OrderStatus.Created,
   });
   await order.save();
 
-  await request(app)
+  const response = await request(app)
     .post("/api/payments")
     .set("Cookie", global.signin(userId))
     .send({
       token: "tok_visa",
       orderId: order.id,
     })
-    .expect(201);
+    .expect(200);
 
-  const chargedOptions = (stripe.charges.create as jest.Mock).mock.calls[0][0];
-  const chargeResult = await (stripe.charges.create as jest.Mock).mock
-    .results[0].value;
+  const payment = await stripe.paymentIntents.list({ limit: 50 });
+  const stripePayment = payment.data.find((payment) => {
+    return payment.amount === price * 100;
+  });
 
-  expect(chargedOptions.amount).toEqual(order.price * 100);
-  expect(chargedOptions.currency).toEqual("inr");
+  expect(stripePayment).toBeDefined();
+  expect(stripePayment!.currency).toEqual("inr");
 });

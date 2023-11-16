@@ -32,13 +32,15 @@ router.post(
     }
 
     if (order.status === OrderStatus.Cancelled) {
-      throw new BadRequestError("Cannot pay for an cancelled order");
+      throw new BadRequestError("Cannot pay for a cancelled order");
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: order.price * 100, // in cents
       currency: "inr",
-      payment_method: "pm_card_visa",
+      payment_method_types: ["card"],
+      payment_method: "pm_card_visa", // replace with actual payment method id
+      confirm: true,
     });
 
     res.send({ success: true });
