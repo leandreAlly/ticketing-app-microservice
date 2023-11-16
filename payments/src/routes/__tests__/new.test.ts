@@ -5,7 +5,6 @@ import { Order } from "../../models/order";
 import { OrderStatus } from "@ally-tickets/common";
 import { stripe } from "../../stripe";
 
-jest.mock("../../stripe");
 
 it("return a 404 when purchasing an order that does not exist", async () => {
   await request(app)
