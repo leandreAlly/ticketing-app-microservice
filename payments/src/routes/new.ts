@@ -43,7 +43,7 @@ router.post(
       confirm: true,
     });
 
-    res.send({ success: true });
+    res.status(201).json({ success: true });
   }
 );
 

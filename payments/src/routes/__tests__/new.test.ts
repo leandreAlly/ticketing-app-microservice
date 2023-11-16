@@ -79,7 +79,7 @@ it("returns a 201 with valid inputs", async () => {
       token: "tok_visa",
       orderId: order.id,
     })
-    .expect(200);
+    .expect(201);
 
   const payment = await stripe.paymentIntents.list({ limit: 50 });
   const stripePayment = payment.data.find((payment) => {
