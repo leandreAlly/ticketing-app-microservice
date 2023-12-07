@@ -1,4 +1,4 @@
-name: tests-auth
+name: tests-payments
 
 on:
   pull_request:
