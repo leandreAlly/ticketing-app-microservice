@@ -1,19 +1,19 @@
-import express from "express";
-import "express-async-errors";
-import cookieSession from "cookie-session";
-import { errorHandler, NotFoundError, currentUser } from "@ally-tickets/common";
-import { newOrderRouter } from "./routes/new";
-import { indexOrderRouter } from "./routes";
-import { showOrderRouter } from "./routes/show";
-import { deleteOrderRouter } from "./routes/delete";
+import express from 'express';
+import 'express-async-errors';
+import cookieSession from 'cookie-session';
+import { errorHandler, NotFoundError, currentUser } from '@ally-tickets/common';
+import { newOrderRouter } from './routes/new';
+import { indexOrderRouter } from './routes';
+import { showOrderRouter } from './routes/show';
+import { deleteOrderRouter } from './routes/delete';
 
 const app = express();
 app.use(express.json());
-app.set("trust proxy", true);
+app.set('trust proxy', true);
 app.use(
   cookieSession({
     signed: false,
-    secure: process.env.NODE_ENV !== "test",
+    secure: false,
   })
 );
 app.use(currentUser);
@@ -22,7 +22,7 @@ app.use(newOrderRouter);
 app.use(showOrderRouter);
 app.use(deleteOrderRouter);
 
-app.all("*", async () => {
+app.all('*', async () => {
   throw new NotFoundError();
 });
 
