@@ -3,7 +3,7 @@ name: deploy-expiration
 on:
   push:
     branches:
-      - main
+      - production
     paths:
       - 'expiration/**'
 jobs:

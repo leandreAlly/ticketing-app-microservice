@@ -3,7 +3,7 @@ name: deploy-orders
 on:
   push:
     branches:
-      - main
+      - production
     paths:
       - 'orders/**'
 jobs:

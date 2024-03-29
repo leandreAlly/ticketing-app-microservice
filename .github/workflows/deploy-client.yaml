@@ -3,9 +3,10 @@ name: deploy-client
 on:
   push:
     branches:
-      - main
+      - production
     paths:
       - 'client/**'
+
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -3,13 +3,13 @@ name: deploy-payments
 on:
   push:
     branches:
-      - main
+        - production
     paths:
       - 'payments/**'
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
+    steps:s
       - uses: actions/checkout@v2
       - run: cd payments && docker build -t allyleandre/payments .
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
