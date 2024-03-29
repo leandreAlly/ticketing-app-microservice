@@ -3,14 +3,14 @@ name: deploy-tickets
 on:
   push:
     branches:
-      - main
+      - production
     paths:
       - 'tickets/**'
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@s
       - run: cd tickets && docker build -t allyleandre/tickets .
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
