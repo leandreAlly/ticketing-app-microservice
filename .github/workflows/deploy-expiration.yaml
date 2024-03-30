@@ -1,24 +1,24 @@
-# name: deploy-expiration
+name: deploy-expiration
 
-# on:
-#   push:
-#     branches:
-#       - production
-#     paths:
-#       - 'expiration/**'
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - run: cd expiration && docker build -t allyleandre/expiration .
-#       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-#         env:
-#           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-#           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-#       - run: docker push allyleandre/expiration
-#       - uses: digitalocean/action-doctl@v2
-#         with:
-#           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-#       - run: doctl kubernetes cluster kubeconfig save ticketing-app
-#       - run: kubectl rollout restart deployment expiration-depl
+on:
+  push:
+    branches:
+      - production
+    paths:
+      - 'expiration/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd expiration && docker build -t allyleandre/expiration .
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker push allyleandre/expiration
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - run: doctl kubernetes cluster kubeconfig save ticketing-app
+      - run: kubectl rollout restart deployment expiration-depl
